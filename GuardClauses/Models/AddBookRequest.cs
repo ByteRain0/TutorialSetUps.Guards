@@ -4,12 +4,12 @@ namespace GuardClauses.Models;
 
 public class AddBookRequest
 {
-    [Required]
+    [Required] 
     public string Name { get; set; }
 
-    [Required]
+    [Required] 
     public string Author { get; set; }
-    
-    [Range(0,int.MaxValue)]
+
+    [Range(0, int.MaxValue)] 
     public int Price { get; set; }
 }

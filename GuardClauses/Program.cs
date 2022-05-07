@@ -1,20 +1,23 @@
-using GuardClauses.Controllers;
-using GuardClauses.Infrastructure;
+using GuardClauses.BookService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<LibraryInformation>(builder.Configuration.GetSection(nameof(LibraryInformation)));
+builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.Configure<BookServiceConfig>(builder.Configuration.GetSection(nameof(BookServiceConfig)));
+
+builder.Services.AddHttpClient("Example", client =>
+{
+    client.BaseAddress = new Uri("www.example.com");
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

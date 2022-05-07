@@ -1,6 +1,4 @@
-﻿using Ardalis.GuardClauses;
-
-namespace GuardClauses.Models;
+﻿namespace GuardClauses.Models;
 
 public class Book
 {
@@ -8,7 +6,6 @@ public class Book
     public string Name { get; set; }
     public int Price { get; set; }
     
-
     public Book(string author, string name, int price)
     {
         // Refactor this
@@ -26,10 +23,5 @@ public class Book
         {
             throw new ArgumentException("Price must not be negative or zero");
         }
-        
-        // Into this
-        Name = Guard.Against.NullOrWhiteSpace(name, nameof(name));
-        Author = Guard.Against.NullOrWhiteSpace(author, nameof(author));
-        Price = Guard.Against.NegativeOrZero(price, nameof(price));
     }
 }
